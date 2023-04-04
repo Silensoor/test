@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2-1
+      author: Vitaliy
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: performer_id
+            baseTableName: tasks
+            constraintName: fk_tasks-workers
+            referencedColumnNames: id
+            referencedTableName: workers

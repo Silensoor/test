@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Vitaliy
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: workers_key
+                  name: id
+                  type: BIGSERIAL
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: position
+                  type: VARCHAR(255)
+              - column:
+                  name: avatar
+                  type: TEXT
+            tableName: workers

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Vitaliy
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: task_key
+                  name: id
+                  type: BIGSERIAL
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: time
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: performer_id
+                  type: BIGINT
+            tableName: tasks
