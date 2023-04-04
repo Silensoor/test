@@ -1,14 +1,14 @@
 package com.example.test.services;
 
-import com.example.test.dto.StatusRs;
-import com.example.test.dto.TaskRq;
-import com.example.test.dto.TaskRs;
+import com.example.test.dto.*;
+import liquibase.pro.packaged.S;
 
 import java.util.List;
 
 public interface TasksService {
     StatusRs addTask(TaskRq taskRq);
     StatusRs putTasksToDatabase();
-    List<TaskRs> getAllTasks();
-    TaskRs getTask();
+    List<TaskShortResponse> getAllTasks();
+    TaskResponse getTaskById(int id);
+    StatusRs addWorker(WorkerForTaskRq workerForTaskRq);
 }

@@ -2,11 +2,13 @@ package com.example.test.dto;
 
 import lombok.Data;
 
+
+import java.io.Serializable;
+
 @Data
-public class TaskRq {
+public class TaskRq implements Serializable {
     private String title;
     private String description;
-
-
 }
+
 

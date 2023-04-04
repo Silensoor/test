@@ -1,10 +1,9 @@
-package com.example.test.model;
+package com.example.test.dto;
 
 import lombok.Data;
 
 @Data
-public class Worker {
-    private Integer id;
+public class WorkerRq {
     private String name;
     private String position;
     private String avatar;

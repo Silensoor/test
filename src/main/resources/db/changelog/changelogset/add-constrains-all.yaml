@@ -9,3 +9,11 @@ databaseChangeLog:
             constraintName: fk_tasks-workers
             referencedColumnNames: id
             referencedTableName: workers
+  - changeSet:
+      id: 4
+      author: Vitaliy
+      changes:
+        - addUniqueConstraint:
+            constraintName: unique
+            columnNames: name,position,avatar
+            tableName: workers
