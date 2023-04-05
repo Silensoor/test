@@ -10,7 +10,7 @@ public class Task {
     private String title;
     private String description;
     private Date time;
-        private Status status;
+    private Status status;
     private Worker performer;
 
 }
