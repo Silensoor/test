@@ -1,6 +1,7 @@
 package com.example.test.repository;
 
-import com.example.test.dto.WorkerRq;
+import com.example.test.dto.request.WorkerForChangeRq;
+import com.example.test.dto.request.WorkerRq;
 import com.example.test.model.Worker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,19 +13,21 @@ import org.springframework.stereotype.Repository;
 public class WorkerRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public boolean addWorker(WorkerRq workerRq) {
+    public int addWorker(WorkerRq workerRq) {
         String name = workerRq.getName();
         String avatar = workerRq.getAvatar();
         String position = workerRq.getPosition();
-        int result = jdbcTemplate.update("insert into workers(name,position,avatar) values (?,?,?)",
+        return jdbcTemplate.update("insert into workers(name,position,avatar) values (?,?,?)",
                 name, position, avatar);
-        return result == 1;
+
 
     }
-    public Worker getWorkerForNPA(WorkerRq workerRq){
+
+    public Worker getWorkerForNPA(WorkerRq workerRq) {
         return jdbcTemplate.query("select * from workers where name=? AND position=? AND avatar=?",
-                workerRowMapper,workerRq.getName(),workerRq.getPosition(),workerRq.getAvatar()).stream().findAny().orElse(null);
+                workerRowMapper, workerRq.getName(), workerRq.getPosition(), workerRq.getAvatar()).stream().findAny().orElse(null);
     }
+
     private static final RowMapper<Worker> workerRowMapper = (resultSet, rowNum) -> {
         Worker worker = new Worker();
         worker.setId(resultSet.getInt("id"));
@@ -33,8 +36,17 @@ public class WorkerRepository {
         worker.setAvatar(resultSet.getString("avatar"));
         return worker;
     };
-    public Worker getWorkerById(Integer id){
+
+    public Worker getWorkerById(Integer id) {
         return jdbcTemplate.query("select * from workers where id=?",
-                workerRowMapper,id).stream().findAny().orElse(null);
+                workerRowMapper, id).stream().findAny().orElse(null);
+    }
+
+    public int removeWorkerById(Integer id) {
+        return jdbcTemplate.update("delete from workers where id=?", id);
+    }
+    public int changeWorker(WorkerForChangeRq worker){
+        return jdbcTemplate.update("update workers set name=?, position=?, avatar=? where id =?",
+                worker.getName(),worker.getPosition(),worker.getAvatar(),worker.getId());
     }
 }

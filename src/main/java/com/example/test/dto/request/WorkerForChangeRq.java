@@ -1,9 +1,10 @@
-package com.example.test.dto;
+package com.example.test.dto.request;
 
 import lombok.Data;
 
 @Data
-public class WorkerRq {
+public class WorkerForChangeRq {
+    private Integer id;
     private String name;
     private String position;
     private String avatar;

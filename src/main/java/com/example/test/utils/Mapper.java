@@ -1,11 +1,13 @@
 package com.example.test.utils;
 
-import com.example.test.dto.TaskResponse;
-import com.example.test.dto.TaskRq;
-import com.example.test.dto.TaskShortResponse;
+import com.example.test.dto.request.TaskForChangeRq;
+import com.example.test.dto.request.WorkerRq;
+import com.example.test.dto.response.TaskRs;
+import com.example.test.dto.request.TaskRq;
+import com.example.test.dto.response.TaskShortRs;
 import com.example.test.model.Status;
 import com.example.test.model.Task;
-
+import com.example.test.model.Worker;
 
 
 import java.util.Date;
@@ -22,21 +24,38 @@ public class Mapper {
         return task;
     }
 
-    public static TaskShortResponse taskModelToTaskShortResponse(Task task) {
-        TaskShortResponse taskShortResponse = new TaskShortResponse();
-        taskShortResponse.setId(task.getId());
-        taskShortResponse.setStatus(task.getStatus());
-        taskShortResponse.setTitle(task.getTitle());
-        return taskShortResponse;
+    public static TaskShortRs taskModelToTaskShortResponse(Task task) {
+        TaskShortRs taskShortRs = new TaskShortRs();
+        taskShortRs.setId(task.getId());
+        taskShortRs.setStatus(task.getStatus());
+        taskShortRs.setTitle(task.getTitle());
+        return taskShortRs;
     }
 
-    public static TaskResponse taskModelToTaskResponse(Task task) {
-        TaskResponse taskResponse = new TaskResponse();
-        taskResponse.setId(task.getId());
-        taskResponse.setTitle(task.getTitle());
-        taskResponse.setDescription(task.getDescription());
-        taskResponse.setStatus(task.getStatus());
-        taskResponse.setPerformer(task.getPerformer());
-        return taskResponse;
+    public static TaskRs taskModelToTaskResponse(Task task) {
+        TaskRs taskRs = new TaskRs();
+        taskRs.setId(task.getId());
+        taskRs.setTitle(task.getTitle());
+        taskRs.setDescription(task.getDescription());
+        taskRs.setStatus(task.getStatus());
+        taskRs.setPerformer(task.getPerformer());
+        return taskRs;
+    }
+    public static Task taskRequestToTaskModelChange(TaskForChangeRq taskForChangeRq){
+        Task task = new Task();
+        task.setId(taskForChangeRq.getId());
+        Status status = Status.valueOf(taskForChangeRq.getStatus());
+        task.setStatus(status);
+        task.setTime(taskForChangeRq.getTime());
+        task.setTitle(taskForChangeRq.getTitle());
+        task.setDescription(taskForChangeRq.getDescription());
+        return task;
+    }
+    public static WorkerRq workerToWorkerRequest(Worker worker){
+        WorkerRq workerRq = new WorkerRq();
+        workerRq.setPosition(worker.getPosition());
+        workerRq.setName(worker.getName());
+        workerRq.setAvatar(worker.getAvatar());
+        return workerRq;
     }
 }

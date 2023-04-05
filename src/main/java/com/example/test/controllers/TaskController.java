@@ -1,6 +1,10 @@
 package com.example.test.controllers;
 
-import com.example.test.dto.*;
+import com.example.test.dto.request.*;
+import com.example.test.dto.response.StatusRs;
+import com.example.test.dto.response.TaskByWorkerRs;
+import com.example.test.dto.response.TaskRs;
+import com.example.test.dto.response.TaskShortRs;
 import com.example.test.services.TasksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +29,35 @@ public class TaskController {
     }
 
     @GetMapping("/all")
-    public List<TaskShortResponse> getTasks() {
+    public List<TaskShortRs> getTasks() {
         return tasksService.getAllTasks();
     }
     @GetMapping("/task")
-    public TaskResponse getTaskForId(@RequestParam("id") Integer id){
+    public TaskRs getTaskById(@RequestParam("id") Integer id){
         return tasksService.getTaskById(id);
     }
-    @PostMapping("/worker")
-    public StatusRs addWorkerForTask(@RequestBody WorkerForTaskRq workerForTaskRq){
+    @PostMapping("/task_worker")
+    public StatusRs addWorkerByTask(@RequestBody WorkerForTaskRq workerForTaskRq){
             return tasksService.addWorker(workerForTaskRq);
     }
-
-
+    @PutMapping("/task")
+    public StatusRs putTask(@RequestBody TaskForChangeRq task){
+            return tasksService.changeTask(task);
+    }
+    @GetMapping("/task_worker")
+    public TaskByWorkerRs getTaskByWorkerId(@RequestParam("id")Integer id){
+        return tasksService.getTaskByWorkerId(id);
+    }
+    @GetMapping("/worker")
+    public WorkerRq getWorkerById(@RequestParam("id")Integer id){
+            return tasksService.getWorkerById(id);
+    }
+    @DeleteMapping("/worker")
+    public StatusRs removeWorkerById(@RequestParam("id") Integer id){
+            return tasksService.deleteWorkerById(id);
+    }
+    @PutMapping("/worker")
+    public StatusRs putWorker(@RequestBody WorkerForChangeRq worker){
+        return tasksService.changeWorkerById(worker);
+    }
 }

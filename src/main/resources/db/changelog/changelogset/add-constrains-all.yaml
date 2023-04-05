@@ -9,6 +9,7 @@ databaseChangeLog:
             constraintName: fk_tasks-workers
             referencedColumnNames: id
             referencedTableName: workers
+            onDelete: SET NULL
   - changeSet:
       id: 4
       author: Vitaliy
