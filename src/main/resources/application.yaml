@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: minesweeper-api
+
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/minesweeper
+    username: postgres
+    password: password
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/minesweeper
+    user: postgres
+    password: password
+    baseline-on-migrate: true
+    validate-on-migrate: false
+
+
+server:
+  port: ${SERVER_PORT:8080}
+  ssl:
+    enabled: true
+    key-store: classpath:/jks/keystore.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+    key-alias: mycert
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+    org.springframework.flyway: DEBUG
